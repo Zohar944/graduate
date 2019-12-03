@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liaozh.springboot.demo.mapper.user.FinanceDataStripDao">
+    <select id="financeDataQuery" resultType="com.liaozh.springboot.demo.model.sql.finance.FinanceDataStrip">
+-- userId由前端用户Id返回，查询一定需要
+        select * from finance_data_strip where user_id = #{userId}
+        <if test="dateId != null">and date_id = #{dateId}</if>
+        <if test="source != null">and source = #{source}</if>
+        <if test="financeType != null">and finance_type = #{financeType}</if>
+    </select>
+
+    <update id="financeDataUpdate" parameterType="com.liaozh.springboot.demo.model.sql.finance.FinanceDataStrip">
+        update finance_data_strip set
+        <if test="dateId != null">date_id = #{dataId},</if>
+        <if test="source != null">source = #{source},</if>
+        <if test="how !=null">how = #{how},</if>
+        <if test="dateTime !=null">date_time = #{dateTime},</if>
+        <if test="project != null">project = #{project},</if>
+        <if test="remarks != null">remarks = #{remarks},</if>
+        <if test="financeType != null">finance_type = #{financeType},</if>
+        user_id = #{userId}
+        where finance_data_id = #{financeDataId} and user_id = #{userId}
+    </update>
+    
+    <insert id="financeDataAdd" parameterType="com.liaozh.springboot.demo.model.sql.finance.FinanceDataStrip">
+        insert into finance_data_strip(
+        user_id,
+        date_id,
+        source,
+        how,
+        date_time,
+        project,
+        remarks,
+        finance_type
+        )values (
+        #{userId},
+        #{dateId},
+        #{source},
+        #{how},
+        #{dateTime},
+        #{project},
+        #{remarks},
+        #{financeType}
+        )
+    </insert>
+</mapper>
