@@ -1,29 +1,29 @@
-#Êı¾İ¿âÇı¶¯ÅäÖÃ
+#æ•°æ®åº“é©±åŠ¨é…ç½®
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 'abc123'
+    password: '123456'
     url: jdbc:mysql://localhost:3306/bookkeeping?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
-  #MybatisÅäÖÃ
+  #Mybatisé…ç½®
 mybatis:
-  #É¨Ãè*mapper.xmlµÄÅäÖÃÎÄ¼şÂ·¾¶
+  #æ‰«æ*mapper.xmlçš„é…ç½®æ–‡ä»¶è·¯å¾„
   mapper-locations: classpath*:/mapper/*.xml
 
-  #±ğÃû£¬Í¨¹ı¸ÃÊôĞÔ¿ÉÒÔ¸ø°üÖĞµÄÀà×¢²á±ğÃû
+  #åˆ«åï¼Œé€šè¿‡è¯¥å±æ€§å¯ä»¥ç»™åŒ…ä¸­çš„ç±»æ³¨å†Œåˆ«å
   type-aliases-package: com.liaozh.springboot.model.sql.*
   configuration:
-    #ÍÕ·åÃüÃû¹æÔò¿ªÆô
+    #é©¼å³°å‘½åè§„åˆ™å¼€å¯
     map-underscore-to-camel-case: true
-    #´òÓ¡²éÑ¯³öÀ´µÄSQLÊı¾İ
+    #æ‰“å°æŸ¥è¯¢å‡ºæ¥çš„SQLæ•°æ®
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
       db-config:
-        #±íÃûÏÂ»®ÏßÃüÃûÄ¬ÈÏtrue
+        #è¡¨åä¸‹åˆ’çº¿å‘½åé»˜è®¤true
         table-underline: true
-        #idÀàĞÍ
+        #idç±»å‹
         id-type: ID_WORKER_STR
-        #Êı¾İ¿âÀàĞÍ
+        #æ•°æ®åº“ç±»å‹
         db-type: sql_server
 server:
   port: 8081

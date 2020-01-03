@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 public interface FinanceDataStripDao extends BaseMapper<FinanceDataStrip> {
     List<FinanceDataStrip> financeDataQuery(@RequestBody @Valid FinanceDataStrip financeDataStrip);
+    List<FinanceDataStrip> newFinanceData(int userId);
     int financeDataUpdate(@RequestBody @Valid FinanceDataStrip financeDataStrip);
     int financeDataAdd(@RequestBody @Valid FinanceDataStrip financeDataStrip);
 }

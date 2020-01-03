@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface FinanceService {
     List<FinanceDataStrip> financeDataQuery(FinanceDataStrip financeDataStrip);
+    List<FinanceDataStrip> newFinanceData(int userId);
     FinanceDataStrip financeDataUpdate(FinanceDataStrip financeDataStrip);
     String financeDataAdd(FinanceDataStrip weChatFinanceDataStrip);
 }

@@ -11,6 +11,11 @@
         <if test="financeType != null">and finance_type = #{financeType}</if>
     </select>
 
+    <select id="newFinanceData" resultType="com.liaozh.springboot.demo.model.sql.finance.FinanceDataStrip">
+        select source,how,date_time,project,remarks,finance_type from finance_data_strip
+        where user_id = #{userId} order by finance_data_id desc limit 0,5
+    </select>
+    
     <update id="financeDataUpdate" parameterType="com.liaozh.springboot.demo.model.sql.finance.FinanceDataStrip">
         update finance_data_strip set
         <if test="dateId != null">date_id = #{dataId},</if>

@@ -17,22 +17,30 @@ public class FinanceDataServiceImpl implements FinanceService {
     FinanceDataStripDao financeDataStripDao;
 
     /**
-     *
      * @param financeDataStrip
      * @return
      */
     @Override
-    public List<FinanceDataStrip> financeDataQuery(FinanceDataStrip financeDataStrip){
-        System.out.println("financeDataStrip.getDateId()"+financeDataStrip.getDateId());
+    public List<FinanceDataStrip> financeDataQuery(FinanceDataStrip financeDataStrip) {
+        // System.out.println("financeDataStrip.getDateId()"+financeDataStrip.getDateId());
 
         List<FinanceDataStrip> listFinance = financeDataStripDao.financeDataQuery(financeDataStrip);
-        for(FinanceDataStrip financeDataStrip1: listFinance) {
-            System.out.println("FinanceDataStrip financeDataStrip1: listFinance"+financeDataStrip1.getDateId());
-        }
+//        for(FinanceDataStrip financeDataStrip1: listFinance) {
+//            System.out.println("FinanceDataStrip financeDataStrip1: listFinance"+financeDataStrip1.getDateId());
+//        }
 
 
-        System.out.println(listFinance);
+//        System.out.println(listFinance);
 
+        return listFinance;
+    }
+
+    @Override
+    public List<FinanceDataStrip> newFinanceData(int userId) {
+        List<FinanceDataStrip> listFinance = financeDataStripDao.newFinanceData(userId);
+//        for (FinanceDataStrip financeDataStrip1 : listFinance) {
+//            System.out.println("FinanceDataStrip financeDataStrip1: listFinance" + financeDataStrip1.getDateId());
+//        }
         return listFinance;
     }
 
@@ -41,14 +49,14 @@ public class FinanceDataServiceImpl implements FinanceService {
 
         int isFinanceUpdate = financeDataStripDao.financeDataUpdate(financeDataStrip);
 
-        if(isFinanceUpdate == 1) {
+        if (isFinanceUpdate == 1) {
             QueryWrapper<FinanceDataStrip> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().eq(FinanceDataStrip::getFinanceDataId, financeDataStrip.getFinanceDataId())
                     .eq(FinanceDataStrip::getUserId, financeDataStrip.getUserId());
 
             FinanceDataStrip queryFinance = financeDataStripDao.selectOne(queryWrapper);
 
-            System.out.println("Serivce  财务数据修改"+queryFinance);
+            System.out.println("Serivce  财务数据修改" + queryFinance);
 
             return queryFinance;
         }
@@ -60,8 +68,8 @@ public class FinanceDataServiceImpl implements FinanceService {
     public String financeDataAdd(FinanceDataStrip weChatFinanceDataStrip) {
 
         int isFinanceAdd = financeDataStripDao.financeDataAdd(weChatFinanceDataStrip);
-        if(isFinanceAdd == 1) {
-           return "SUCCESS";
+        if (isFinanceAdd == 1) {
+            return "SUCCESS";
         }
         return "ERROR";
 

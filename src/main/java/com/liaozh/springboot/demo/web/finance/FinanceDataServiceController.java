@@ -13,29 +13,37 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "Finance", description = "财务数据接口")
 @RestController
 @RequestMapping("finance")
-public class FinanceDataServiceController extends Thread{
+public class FinanceDataServiceController extends Thread {
 
     @Autowired
     FinanceService financeService;
 
+    //全部查询
     @ApiOperation(value = "财务数据查询")
     @RequestMapping(value = "/financeDataQuery", method = RequestMethod.POST)
-    public ResponseDto<FinanceDataStrip> financeDataQuery(FinanceDataStrip financeDataStrip){
+    public ResponseDto<FinanceDataStrip> financeDataQuery(FinanceDataStrip financeDataStrip) {
 
-        return new ResponseDto("200","查询成功",financeService.financeDataQuery(financeDataStrip));
+        return new ResponseDto("200", "查询成功", financeService.financeDataQuery(financeDataStrip));
+    }
+
+    //最新数据查询
+    @ApiOperation(value = "最新数据查询")
+    @RequestMapping(value = "newFinanceData", method = RequestMethod.POST)
+    public ResponseDto<FinanceDataStrip> newFinanceData(int userId) {
+        return new ResponseDto("200","查询成功",financeService.newFinanceData(userId));
     }
 
     @ApiOperation(value = "财务数据修改")
     @RequestMapping(value = "/financeDataUpdate", method = RequestMethod.POST)
-    public ResponseDto<FinanceDataStrip> financeDataUpdate(FinanceDataStrip financeDataStrip){
+    public ResponseDto<FinanceDataStrip> financeDataUpdate(FinanceDataStrip financeDataStrip) {
 
-        return new ResponseDto("200","修改成功",financeService.financeDataUpdate(financeDataStrip));
+        return new ResponseDto("200", "修改成功", financeService.financeDataUpdate(financeDataStrip));
     }
 
     @ApiOperation(value = "财务数据插入")
     @RequestMapping(value = "/financeDataAdd", method = RequestMethod.POST)
-    public ResponseDto<String> financeDataAdd(FinanceDataStrip weiChatFinanceDataStrip){
+    public ResponseDto<String> financeDataAdd(FinanceDataStrip weiChatFinanceDataStrip) {
 
-        return new ResponseDto("200","插入成功",financeService.financeDataAdd(weiChatFinanceDataStrip));
+        return new ResponseDto("200", "插入成功", financeService.financeDataAdd(weiChatFinanceDataStrip));
     }
 }
