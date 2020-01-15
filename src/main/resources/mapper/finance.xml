@@ -4,18 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liaozh.springboot.demo.mapper.user.FinanceDataStripDao">
     <select id="financeDataQuery" resultType="com.liaozh.springboot.demo.model.sql.finance.FinanceDataStrip">
--- userId由前端用户Id返回，查询一定需要
+        -- userId由前端用户Id返回，查询一定需要
         select * from finance_data_strip where user_id = #{userId}
         <if test="dateId != null">and date_id = #{dateId}</if>
         <if test="source != null">and source = #{source}</if>
         <if test="financeType != null">and finance_type = #{financeType}</if>
     </select>
 
+    <select id="transactionNumber" resultType="String">
+        select transaction_number from finance_data_strip where user_id = #{userId} and source = #{source}
+    </select>
+
     <select id="newFinanceData" resultType="com.liaozh.springboot.demo.model.sql.finance.FinanceDataStrip">
         select source,how,date_time,project,remarks,finance_type from finance_data_strip
-        where user_id = #{userId} order by finance_data_id desc limit 0,5
+        where user_id = #{userId} order by date_id desc limit 0,5
     </select>
-    
+
     <update id="financeDataUpdate" parameterType="com.liaozh.springboot.demo.model.sql.finance.FinanceDataStrip">
         update finance_data_strip set
         <if test="dateId != null">date_id = #{dataId},</if>
@@ -25,10 +29,11 @@
         <if test="project != null">project = #{project},</if>
         <if test="remarks != null">remarks = #{remarks},</if>
         <if test="financeType != null">finance_type = #{financeType},</if>
+        <if test="transactionNumber != null">transaction_number = #{transactionNumber},</if>
         user_id = #{userId}
         where finance_data_id = #{financeDataId} and user_id = #{userId}
     </update>
-    
+
     <insert id="financeDataAdd" parameterType="com.liaozh.springboot.demo.model.sql.finance.FinanceDataStrip">
         insert into finance_data_strip(
         user_id,
@@ -38,7 +43,8 @@
         date_time,
         project,
         remarks,
-        finance_type
+        finance_type,
+        transaction_number
         )values (
         #{userId},
         #{dateId},
@@ -47,7 +53,38 @@
         #{dateTime},
         #{project},
         #{remarks},
-        #{financeType}
+        #{financeType},
+        #{transactionNumber}
         )
     </insert>
+
+    <insert id="billImport" parameterType="java.util.List" useGeneratedKeys="false" >
+        insert into finance_data_strip(
+        finance_data_id,
+        user_id,
+        date_id,
+        source,
+        how,
+        date_time,
+        project,
+        remarks,
+        finance_type,
+        transaction_number
+        )VALUES
+        <foreach collection="list" index="idenx" item="item" open="" separator="," close="">
+            (
+            #{item.financeDataId,jdbcType=INTEGER},
+            #{item.userId,jdbcType=INTEGER},
+            #{item.dateId,jdbcType=VARCHAR},
+            #{item.source,jdbcType=VARCHAR},
+            #{item.how,jdbcType=DOUBLE},
+            #{item.dateTime,jdbcType=VARCHAR},
+            #{item.project,jdbcType=VARCHAR},
+            #{item.remarks,jdbcType=VARCHAR},
+            #{item.financeType,jdbcType=VARCHAR},
+            #{item.transactionNumber,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
 </mapper>

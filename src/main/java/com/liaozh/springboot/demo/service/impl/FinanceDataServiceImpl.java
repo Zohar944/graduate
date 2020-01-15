@@ -7,7 +7,10 @@ import com.liaozh.springboot.demo.service.FinanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -22,25 +25,13 @@ public class FinanceDataServiceImpl implements FinanceService {
      */
     @Override
     public List<FinanceDataStrip> financeDataQuery(FinanceDataStrip financeDataStrip) {
-        // System.out.println("financeDataStrip.getDateId()"+financeDataStrip.getDateId());
-
         List<FinanceDataStrip> listFinance = financeDataStripDao.financeDataQuery(financeDataStrip);
-//        for(FinanceDataStrip financeDataStrip1: listFinance) {
-//            System.out.println("FinanceDataStrip financeDataStrip1: listFinance"+financeDataStrip1.getDateId());
-//        }
-
-
-//        System.out.println(listFinance);
-
         return listFinance;
     }
 
     @Override
     public List<FinanceDataStrip> newFinanceData(int userId) {
         List<FinanceDataStrip> listFinance = financeDataStripDao.newFinanceData(userId);
-//        for (FinanceDataStrip financeDataStrip1 : listFinance) {
-//            System.out.println("FinanceDataStrip financeDataStrip1: listFinance" + financeDataStrip1.getDateId());
-//        }
         return listFinance;
     }
 
@@ -73,5 +64,47 @@ public class FinanceDataServiceImpl implements FinanceService {
         }
         return "ERROR";
 
+    }
+
+    /**
+     * 微信财务数据批量导入
+     * @param financeDataStrip
+     * @param userId
+     * @param source
+     * @return
+     */
+    @Override
+    public String billImport(List<FinanceDataStrip> financeDataStrip, int userId, String source) {
+        List<String> queryTransactionNumber = financeDataStripDao.transactionNumber(userId, source);
+
+        for(int a = 0; a< financeDataStrip.size(); a++){ //去重
+            for(String query : queryTransactionNumber) {
+                if (financeDataStrip.get(a).getTransactionNumber().equals(query)){
+                    financeDataStrip.remove(a);
+                    if(a != 0) {
+                        a--;//List是动态变化的，不像数组会占位，此时的索引因后退一位。
+                    }
+                }
+            }
+        }
+//        Iterator<FinanceDataStrip> it = financeDataStrip.iterator();
+//        while (it.hasNext()){
+//            for (String query :queryTransactionNumber) {
+//                String aa =it.next().getTransactionNumber();
+//                if(aa.equals(query)){
+//                    System.out.println(aa);
+//                    it.remove();
+//                }
+//            }
+//        }
+
+        if (!financeDataStrip.isEmpty() && financeDataStrip != null) {
+            if(financeDataStripDao.billImport(financeDataStrip)){
+                return "SUCCESS";
+            }else {
+               return "ERROR";
+            }
+        }
+        return "账单表为空或已存在数据";
     }
 }

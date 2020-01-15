@@ -49,6 +49,12 @@ public class FinanceDataStrip extends Model<FinanceDataStrip> {
      */
     private String financeType;
 
+    /**
+     * 交易单号
+     * @return
+     */
+    private String transactionNumber;
+
     public int getFinanceDataId() {
         return financeDataId;
     }
@@ -121,6 +127,14 @@ public class FinanceDataStrip extends Model<FinanceDataStrip> {
         this.financeType = financeType;
     }
 
+    public String  getTransactionNumber() {
+        return transactionNumber;
+    }
+
+    public void setTransactionNumber(String transactionNumber) {
+        this.transactionNumber = transactionNumber;
+    }
+
     @Override
     public String toString() {
         return "FinanceDataStrip{" +
@@ -133,6 +147,8 @@ public class FinanceDataStrip extends Model<FinanceDataStrip> {
                 ", project='" + project + '\'' +
                 ", remarks='" + remarks + '\'' +
                 ", financeType='" + financeType + '\'' +
+                ", transactionNumber='" + transactionNumber + '\'' +
                 '}';
     }
+
 }

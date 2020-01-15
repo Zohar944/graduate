@@ -4,7 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: '123456'
-    url: jdbc:mysql://localhost:3306/bookkeeping?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://localhost:3306/bookkeeping?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
   #Mybatis配置
 mybatis:
   #扫描*mapper.xml的配置文件路径
