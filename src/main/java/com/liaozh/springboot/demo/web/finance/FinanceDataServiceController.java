@@ -31,6 +31,7 @@ public class FinanceDataServiceController extends Thread {
     FinanceService financeService;
 
     //全部查询
+    @CrossOrigin
     @ApiOperation(value = "财务数据查询")
     @RequestMapping(value = "/financeDataQuery", method = RequestMethod.POST)
     public ResponseDto<FinanceDataStrip> financeDataQuery(FinanceDataStrip financeDataStrip) {
