@@ -45,7 +45,6 @@ public class UserServiceController {
     @ApiOperation(value = "编辑信息")
     @RequestMapping(value = "/userEdit", method = RequestMethod.POST)
     public ResponseDto<User> userEdit(User user) {
-
         return new ResponseDto("200","修改成功",userService.userEdit(user));
     }
 

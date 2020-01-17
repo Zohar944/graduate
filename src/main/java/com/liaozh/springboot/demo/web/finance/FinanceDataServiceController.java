@@ -34,7 +34,7 @@ public class FinanceDataServiceController extends Thread {
     @CrossOrigin
     @ApiOperation(value = "财务数据查询")
     @RequestMapping(value = "/financeDataQuery", method = RequestMethod.POST)
-    public ResponseDto<FinanceDataStrip> financeDataQuery(FinanceDataStrip financeDataStrip) {
+    public ResponseDto<List<FinanceDataStrip>> financeDataQuery(FinanceDataStrip financeDataStrip) {
 
         return new ResponseDto("200", "查询成功", financeService.financeDataQuery(financeDataStrip));
     }
@@ -43,7 +43,7 @@ public class FinanceDataServiceController extends Thread {
     @CrossOrigin
     @ApiOperation(value = "最新数据查询")
     @RequestMapping(value = "/newFinanceData", method = RequestMethod.POST)
-    public ResponseDto<FinanceDataStrip> newFinanceData(int userId) {
+    public ResponseDto<List<FinanceDataStrip>> newFinanceData(int userId) {
         return new ResponseDto("200", "查询成功", financeService.newFinanceData(userId));
     }
 
