@@ -10,6 +10,7 @@ import org.springframework.data.relational.core.mapping.Table;
  */
 @Table
 public class User extends Model<User> {
+
     /**
      * 用户账号
      */

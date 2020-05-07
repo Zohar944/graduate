@@ -10,6 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.Map;
+
 @EnableSwagger2
 @Configuration
 @SpringBootApplication

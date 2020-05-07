@@ -35,10 +35,11 @@ public class UserServiceController {
     @RequestMapping(value = "/userRegister", method = RequestMethod.POST)
     public ResponseDto<UserLoginResponseDto> userRegister(@RequestBody @Valid User userRequestDto) {
         Integer data = userService.userRegister(userRequestDto);
-        if(StringUtils.isEmpty(data)) {
+//        if(StringUtils.isEmpty(data)) {
+        if(data != null) {
             return new ResponseDto("200","注册成功",data);
         }else {
-            return new ResponseDto("200","注册失败",data);
+            return new ResponseDto("200","注册失败","手机号码已注册");
         }
     }
 

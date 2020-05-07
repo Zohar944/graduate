@@ -25,5 +25,6 @@ mybatis:
         id-type: ID_WORKER_STR
         #数据库类型
         db-type: sql_server
+  #服务器配置
 server:
-  port: 8081
+  port: 8888
