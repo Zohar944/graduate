@@ -6,7 +6,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 
 
-@Table
+@Table("finance_data_strip")
 public class FinanceDataStrip extends Model<FinanceDataStrip> {
 
     /**

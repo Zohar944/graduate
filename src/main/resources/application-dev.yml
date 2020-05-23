@@ -1,0 +1,30 @@
+#数据库驱动配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: '123456'
+    url: jdbc:mysql://localhost:3306/bookkeeping?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+  #Mybatis配置
+mybatis:
+  #扫描*mapper.xml的配置文件路径
+  mapper-locations: classpath*:/mapper/*.xml
+
+  #别名，通过该属性可以给包中的类注册别名
+  type-aliases-package: com.liaozh.springboot.model.sql.*
+  configuration:
+    #驼峰命名规则开启
+    map-underscore-to-camel-case: true
+    #打印查询出来的SQL数据
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      #表名下划线命名默认true
+      table-underline: true
+      #id类型
+      id-type: ID_WORKER_STR
+      #数据库类型
+      db-type: sql_server
+  #服务器配置
+server:
+  port: 8080

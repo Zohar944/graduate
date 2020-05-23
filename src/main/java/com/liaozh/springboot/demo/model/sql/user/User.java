@@ -8,7 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 /**
  * 用户表
  */
-@Table
+@Table("user")
 public class User extends Model<User> {
 
     /**
